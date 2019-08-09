@@ -25,8 +25,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public boolean findUser(Long id) {
+		if (userRepo.existsById(id)) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	@Override
 	public Optional<User> getUser(Long id) {
-		return(userRepo.findById(id));
+		return userRepo.findById(id);
 	}
 
 }

@@ -8,5 +8,6 @@ public interface UserService {
 	
 	String createUser(User user);
 	Optional<User> getUser(Long id);
+	boolean findUser(Long id);
 
 }

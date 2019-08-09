@@ -26,9 +26,10 @@ public class PokemonController {
 
 	@GetMapping(value = "/{id}/{number}", produces="application/json")
 	public Object getPokemonByNum(@PathVariable("id") Long id, @PathVariable("number") String number){
+				
 		ResponseEntity<Object> response = new ResponseEntity<Object>(pokemonService.getPokemonByNum(id,number),HttpStatus.OK);
 		
-		return(response);
+		return(response.getBody());
 	
 	}
 	

@@ -19,11 +19,12 @@ public class PokemonServiceImpl implements PokemonService {
 	}
 
 	public ResponseEntity<Object> getPokemonByNum(Long id, String number) {
+		
 
-		ResponseEntity<String> exchangeGetUser = restTemplate.exchange("http://localhost:8081/user/getUser/" + id,
-				HttpMethod.GET, null, String.class);
+		ResponseEntity<Boolean> exchangeGetUser = restTemplate.exchange("http://localhost:8081/user/findUser/" + id,
+				HttpMethod.GET, null, boolean.class);
 
-		if (exchangeGetUser != null) {
+		if (exchangeGetUser.getBody() != false) {
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("user-agent",
@@ -34,17 +35,19 @@ public class PokemonServiceImpl implements PokemonService {
 			return restTemplate.exchange("https://pokeapi.co/api/v2/pokemon/" + number, HttpMethod.GET, entity,
 					Object.class);
 
-		}
+		} else {
 
-		return (null);
+			return (null);
+		
+		}
 	}
 
 	public ResponseEntity<Object> getPokemonByName(Long id, String name) {
 
-		ResponseEntity<String> exchangeGetUser = restTemplate.exchange("http://localhost:8081/user/getUser/" + id,
-				HttpMethod.GET, null, String.class);
+		ResponseEntity<Boolean> exchangeGetUser = restTemplate.exchange("http://localhost:8081/user/getUser/" + id,
+				HttpMethod.GET, null, boolean.class);
 
-		if (exchangeGetUser != null) {
+		if (exchangeGetUser.getBody() != false) {
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.add("user-agent",

@@ -35,11 +35,15 @@ public class UserController {
 		
 	}
 	
-	@GetMapping(value="/getUser/{id}", produces="application/json")	
-	public Optional<User> getUser(@PathVariable("id") Long id){
+	@GetMapping(value="/findUser/{id}", produces="application/json")	
+	public boolean findUser(@PathVariable("id") Long id){	
+		return userService.findUser(id);
 		
+	}
+	
+	@GetMapping(value="/getUser/{id}")	
+	public Optional<User> getUser(@PathVariable("id") Long id){	
 		return userService.getUser(id);
-		
 		
 	}
 
