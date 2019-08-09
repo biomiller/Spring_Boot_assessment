@@ -1,13 +1,16 @@
 package com.bae.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.http.MediaType;
 
-import com.bae.entity.User;
-
+@Service
 public class CoreServiceImpl implements CoreService {
 	
 	private RestTemplate restTemplate;
@@ -21,11 +24,18 @@ public class CoreServiceImpl implements CoreService {
 
 
 	@Override
-	public String createUser(User user) {
-		ResponseEntity<String> exchangeCreateUser = restTemplate.postForEntity("http://localhost:8081/user/", 
-				user, String.class);
+	public String createUser(String user) {
+				
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.APPLICATION_JSON);
+
+		HttpEntity<String> request = new HttpEntity<String>(user,header);
+
 		
-		return exchangeCreateUser.getBody();
+		ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:8081/user/createUser", 
+				request, String.class);
+		
+		return response.getBody();
 	}
 
 	@Override
