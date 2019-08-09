@@ -39,9 +39,15 @@ public class CoreServiceImpl implements CoreService {
 	}
 
 	@Override
-	public String getPokemonByNum(int userId, int pokeNum) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getPokemonByNum(int userId, int number) {
+		ResponseEntity<String> response = restTemplate.exchange("http://localhost:8082/pokemon/{userid}/{number}", 
+				HttpMethod.GET, null, String.class);
+		
+		if(response != null) {
+			return(response.getBody());
+		} else {
+			return("User does not exist.");
+		}
 	}
 
 	@Override

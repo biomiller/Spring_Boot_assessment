@@ -1,27 +1,28 @@
 package com.bae.rest;
 
-import javax.websocket.server.PathParam;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bae.entity.User;
-import com.bae.service.UserService;
+import com.bae.service.UserServiceImpl;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 	
-	private UserService userService;
+	private UserServiceImpl userService;
 	
 	@Autowired
-	public UserController(UserService userService) {
+	public UserController(UserServiceImpl userService) {
 		this.userService=userService;
 	}
 	
@@ -34,12 +35,11 @@ public class UserController {
 		
 	}
 	
-	@GetMapping(value="/getUser/{userId}")	
-	public ResponseEntity<String> getUser(@PathParam("userId") Long userId){
+	@GetMapping(value="/getUser/{id}", produces="application/json")	
+	public Optional<User> getUser(@PathVariable("id") Long id){
 		
-		ResponseEntity<String> response = new ResponseEntity<String>(userService.getUser(userId),HttpStatus.OK);
+		return userService.getUser(id);
 		
-		return(response);
 		
 	}
 

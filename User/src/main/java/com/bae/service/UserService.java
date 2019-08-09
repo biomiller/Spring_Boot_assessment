@@ -1,10 +1,12 @@
 package com.bae.service;
 
+import java.util.Optional;
+
 import com.bae.entity.User;
 
 public interface UserService {
 	
 	String createUser(User user);
-	String getUser(Long userId);
+	Optional<User> getUser(Long id);
 
 }

@@ -1,5 +1,7 @@
 package com.bae.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +25,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String getUser(Long userId) {
-		if (userRepo.existsById(userId)) {
-			return("User exists.");
-		} else {
-			return("User does not exist.");
-		}
+	public Optional<User> getUser(Long id) {
+		return(userRepo.findById(id));
 	}
 
 }

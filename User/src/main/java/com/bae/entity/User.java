@@ -10,7 +10,7 @@ public class User {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
 	
     private Long memberNumber;
 	private String name;
@@ -35,13 +35,15 @@ public class User {
 		this.name = name;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setId(Long id) {
+		this.id = id;
 	}
+
+
 	
 
 }
